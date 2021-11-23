@@ -1,0 +1,6 @@
+1. Character walk
+2. Pushing boxes
+3. End when all boxes are in the room
+4. touching walls
+5. reset
+6. move count
