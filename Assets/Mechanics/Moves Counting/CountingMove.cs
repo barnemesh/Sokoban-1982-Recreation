@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Move counter mechanic.
+ * Move with arrow keys.
+ * Each movement increases a global moves counter.
+ */
 public class CountingMove : MonoBehaviour
 {
     [SerializeField]

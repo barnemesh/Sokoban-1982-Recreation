@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Manager to count the number of targets that have no boxes.
+ * Turns red if the counter is not 0 (not won yet).
+ * Turns green when all targets have boxes (game won).
+ */
 public class WinCounter : MonoBehaviour
 {
     [SerializeField]

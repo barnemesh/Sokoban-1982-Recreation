@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/**
+ * Manager to allow resetting all objects to initial position.
+ * Register functions to call when reset.
+ * Press R to invoke call to all registered functions.
+ */
 public class ResetController : MonoBehaviour
 {
     private static ResetController _shared;

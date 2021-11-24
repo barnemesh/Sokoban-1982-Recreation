@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Check if there is a box ahead.
+ * Move with arrow keys.
+ * If there is a box - try to push it.
+ * If there is a box - move only if the box moved.
+ */
 public class BoxCheck : MonoBehaviour
 {
     [SerializeField]

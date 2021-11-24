@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Position mechanic - save initial position in the level.
+ * Move with arrow keys.
+ * When a reset occurs - return to initial position.
+ */
 public class MoveWithReset : MonoBehaviour
 {
     [SerializeField]
@@ -49,7 +54,7 @@ public class MoveWithReset : MonoBehaviour
         {
             return;
         }
-        
+
         myRigidbody.position += direction;
     }
 }

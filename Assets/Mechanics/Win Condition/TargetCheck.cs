@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Add 1 to global win counter whenever there is no box above the target.
+ */
 public class TargetCheck : MonoBehaviour
 {
     // Start is called before the first frame update

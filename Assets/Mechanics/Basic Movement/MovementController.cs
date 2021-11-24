@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * Movement mechanic: move the avatar in the direction of the pressed arrow key, and change to the correct sprite.
+ * Movement mechanic.
+ * Move the avatar using the arrow keys.
+ * Change the sprite to the correct sprite based on last movement direction.
+ * Do not teleport - gradual movement.
+ * While moving - do not take new movement input.
  */
 public class MovementController : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("How many updates should a single movement take")]
     private float updatesCountInMovement = 4.0f;
 
     [SerializeField]
+    [Tooltip("Up, Down, Left, Right")]
     private Sprite[] sprites;
 
     [SerializeField]

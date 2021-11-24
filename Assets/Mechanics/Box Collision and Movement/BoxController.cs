@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/**
+ * Box movement controls.
+ * If pushed - try and move in the direction pushed.
+ * If there is nothing there - move.
+ * If there is anything in the way - dont move.
+ */
 public class BoxController : MonoBehaviour
 {
     [SerializeField]

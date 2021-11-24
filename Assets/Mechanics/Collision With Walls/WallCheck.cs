@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Movement mechanics - wall blocks movement.
+ * Move with arrow keys.
+ * If there is a Wall (or any other immovable - to be merged with boxes), do not move in that direction.
+ */
 public class WallCheck : MonoBehaviour
 {
     [SerializeField]
