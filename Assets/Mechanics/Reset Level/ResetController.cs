@@ -7,30 +7,29 @@ using UnityEngine.Events;
 /**
  * Manager to allow resetting all objects to initial position.
  * Register functions to call when reset.
- * Press R to invoke call to all registered functions.
+ * Press F1 to invoke call to all registered functions.
  */
 public class ResetController : MonoBehaviour
 {
     private static ResetController _shared;
 
-    [SerializeField]
-    private UnityEvent resetLevel;
+    private event Action ResetLevel;
 
     private void Awake ()
     {
         _shared = this;
     }
 
-    public static void RegisterReset (UnityAction call)
+    public static void RegisterReset (Action call)
     {
-        _shared.resetLevel.AddListener(call);
+        _shared.ResetLevel += call;
     }
 
     private void Update ()
     {
-        if ( Input.GetKeyDown(KeyCode.R) )
+        if ( Input.GetKeyDown(KeyCode.F1) )
         {
-            resetLevel.Invoke();
+            ResetLevel?.Invoke();
         }
     }
 }
