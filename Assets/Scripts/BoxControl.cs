@@ -69,7 +69,7 @@ public class BoxControl : MonoBehaviour
     {
         if (other.CompareTag("Target"))
         {
-            GameManager.TargetCounter--;
+            LevelGameManager.TargetCounter--;
         }
     }
 
@@ -77,7 +77,7 @@ public class BoxControl : MonoBehaviour
     {
         if (other.CompareTag("Target"))
         {
-            GameManager.TargetCounter++;
+            LevelGameManager.TargetCounter++;
         }
     }
 }

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GameManager : MonoBehaviour
+public class LevelGameManager : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("The Tilemap containing the target tiles")]
     private Tilemap targetsTilemap;
 
-    private static GameManager _shared;
+    private static LevelGameManager _shared;
     private int _targetCounter;
     private int _level = 1;
     private bool _levelWon;
