@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -24,20 +25,21 @@ public class BoxControl : MonoBehaviour
     private Vector2 _lastPosition;
     private float _distancePercentage;
 
-    private void Start()
+    private void Start ()
     {
         _lastPosition = myRigidbody.position;
+        LevelGameManager.TargetCounter++;
     }
 
-    public bool TryToMoveInDirection(Vector2 direction)
+    public bool TryToMoveInDirection (Vector2 direction)
     {
-        if (_moving)
+        if ( _moving )
         {
             return false;
         }
 
         RaycastHit2D hit = Physics2D.Raycast(myRigidbody.position, direction, 1.0f);
-        if (hit.collider == null)
+        if ( hit.collider == null )
         {
             _targetDirection = direction;
             _moving = true;
@@ -47,9 +49,9 @@ public class BoxControl : MonoBehaviour
         return false;
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate ()
     {
-        if (!_moving)
+        if ( !_moving )
             return;
 
         _distancePercentage += (1 / updatesCountInMovement);
@@ -57,7 +59,7 @@ public class BoxControl : MonoBehaviour
 
         myRigidbody.MovePosition(_lastPosition + _distancePercentage * _targetDirection);
 
-        if (!(_distancePercentage >= 1))
+        if ( !(_distancePercentage >= 1) )
             return;
 
         _distancePercentage = 0;
@@ -65,19 +67,21 @@ public class BoxControl : MonoBehaviour
         _moving = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D (Collider2D other)
     {
-        if (other.CompareTag("Target"))
+        if ( other.CompareTag("Target") )
         {
             LevelGameManager.TargetCounter--;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D (Collider2D other)
     {
-        if (other.CompareTag("Target"))
+        if ( other.CompareTag("Target") )
         {
             LevelGameManager.TargetCounter++;
         }
     }
+    
+    
 }
