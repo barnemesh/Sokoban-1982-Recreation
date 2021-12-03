@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 /**
  * Box movement controls.
@@ -13,33 +8,20 @@ using UnityEngine;
  */
 public class BoxControl : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("How many updates should a single movement take")]
-    private float updatesCountInMovement = 4.0f;
+    #region Public Methods
 
-    [SerializeField]
-    private Rigidbody2D myRigidbody;
-
-    private Vector2 _targetDirection;
-    private bool _moving;
-    private Vector2 _lastPosition;
-    private float _distancePercentage;
-
-    private void Start ()
+    /**
+     * <summary>Check if the box can be moved in specified direction, and if it can, move it.</summary>
+     * 
+     * <param name="direction">direction to move</param>
+     * <returns>true if moved, false o.w</returns>
+     */
+    public bool TryToMoveInDirection(Vector2 direction)
     {
-        _lastPosition = myRigidbody.position;
-        LevelGameManager.TargetCounter++;
-    }
+        if (_moving) return false;
 
-    public bool TryToMoveInDirection (Vector2 direction)
-    {
-        if ( _moving )
-        {
-            return false;
-        }
-
-        RaycastHit2D hit = Physics2D.Raycast(myRigidbody.position, direction, 1.0f);
-        if ( hit.collider == null )
+        var hit = Physics2D.Raycast(myRigidbody.position, direction, 1.0f);
+        if (hit.collider == null)
         {
             _targetDirection = direction;
             _moving = true;
@@ -49,17 +31,48 @@ public class BoxControl : MonoBehaviour
         return false;
     }
 
-    private void FixedUpdate ()
+    #endregion
+
+    #region Inspector
+
+    [SerializeField]
+    [Tooltip("How many updates should a single movement take")]
+    private float updatesCountInMovement = 4.0f;
+
+    [SerializeField]
+    private Rigidbody2D myRigidbody;
+
+    #endregion
+
+    #region Private Fields
+
+    private Vector2 _targetDirection;
+    private bool _moving;
+    private Vector2 _lastPosition;
+    private float _distancePercentage;
+
+    #endregion
+
+    #region Monobehaviour
+
+    private void Start()
     {
-        if ( !_moving )
+        _lastPosition = myRigidbody.position;
+        LevelGameManager.TargetCounter++;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!_moving)
             return;
 
-        _distancePercentage += (1 / updatesCountInMovement);
+        // If we need to move, use exactly updatesCountInMovement to finish the entire movement.
+        _distancePercentage += 1 / updatesCountInMovement;
         _distancePercentage = _distancePercentage >= 1 ? 1 : _distancePercentage;
 
         myRigidbody.MovePosition(_lastPosition + _distancePercentage * _targetDirection);
 
-        if ( !(_distancePercentage >= 1) )
+        if (!(_distancePercentage >= 1))
             return;
 
         _distancePercentage = 0;
@@ -67,21 +80,17 @@ public class BoxControl : MonoBehaviour
         _moving = false;
     }
 
-    private void OnTriggerEnter2D (Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if ( other.CompareTag("Target") )
-        {
-            LevelGameManager.TargetCounter--;
-        }
+        // When a box reaches a target - mark that target as complete
+        if (other.CompareTag("Target")) LevelGameManager.TargetCounter--;
     }
 
-    private void OnTriggerExit2D (Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if ( other.CompareTag("Target") )
-        {
-            LevelGameManager.TargetCounter++;
-        }
+        // When a box leaves a target - mark that target as not complete
+        if (other.CompareTag("Target")) LevelGameManager.TargetCounter++;
     }
-    
-    
+
+    #endregion
 }

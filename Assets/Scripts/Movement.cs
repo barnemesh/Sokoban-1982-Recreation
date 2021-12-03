@@ -1,10 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Player avatar controller.
+ */
 public class Movement : MonoBehaviour
 {
+    #region Properties
+
+    /**
+     * Is movement Paused?
+     */
+    public bool Pause { get; set; }
+
+    #endregion
+
+    #region Inspector
+
     [SerializeField]
     [Tooltip("How many updates should a single movement take")]
     private float updatesCountInMovement = 4.0f;
@@ -19,25 +30,32 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private Rigidbody2D myRigidbody;
 
+    #endregion
+
+
+    #region Private Fields
 
     private Vector2 _targetDirection;
     private Vector2 _lastPosition;
     private bool _moving;
     private float _distancePercentage;
 
+    #endregion
+
+    #region Monobehaviour
+
     private void Start()
     {
         _lastPosition = myRigidbody.position;
+        LevelGameManager.Player = this;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (_moving)
-        {
-            return;
-        }
+        if (Pause || _moving) return;
 
+        // Choose movement direction based on input, i not already moving.
         _targetDirection = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -63,35 +81,31 @@ public class Movement : MonoBehaviour
             _targetDirection = Vector2.down;
         }
 
-        if (_targetDirection == Vector2.zero)
-        {
-            return;
-        }
+        if (_targetDirection == Vector2.zero) return;
 
-        RaycastHit2D hit = Physics2D.Raycast(myRigidbody.position, _targetDirection, 1.0f);
+        // if we need to move - check if we can move in the desired direction.
+
+        var hit = Physics2D.Raycast(myRigidbody.position, _targetDirection, 1.0f);
+
+        // if there is a box, check if it can be moved before moving.
         if (hit.collider != null && hit.collider.CompareTag("Box"))
         {
-            BoxControl boxControl = hit.collider.GetComponent<BoxControl>();
-            if (!boxControl.TryToMoveInDirection(_targetDirection))
-            {
-                return;
-            }
+            var boxControl = hit.collider.GetComponent<BoxControl>();
+            if (!boxControl.TryToMoveInDirection(_targetDirection)) return;
 
             _moving = true;
         }
 
-        if (hit.collider == null)
-        {
-            _moving = true;
-        }
+        if (hit.collider == null) _moving = true;
     }
 
     private void FixedUpdate()
     {
-        if (!_moving)
+        if (Pause || !_moving)
             return;
 
-        _distancePercentage += (1 / updatesCountInMovement);
+        // If we need to move, use exactly updatesCountInMovement to finish the entire movement.
+        _distancePercentage += 1 / updatesCountInMovement;
         _distancePercentage = _distancePercentage >= 1 ? 1 : _distancePercentage;
 
         myRigidbody.MovePosition(_lastPosition + _distancePercentage * _targetDirection);
@@ -103,4 +117,6 @@ public class Movement : MonoBehaviour
         _lastPosition += _targetDirection;
         _moving = false;
     }
+
+    #endregion
 }
