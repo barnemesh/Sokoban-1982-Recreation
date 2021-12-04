@@ -1,5 +1,7 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class LevelGameManager : MonoBehaviour
 {
@@ -16,6 +18,15 @@ public class LevelGameManager : MonoBehaviour
 
     [SerializeField]
     private int maxResetCount = 4;
+
+    [SerializeField]
+    private LevelData levelData;
+
+    [SerializeField]
+    private GameObject boxPrefab;
+
+    [SerializeField]
+    private GameObject playerPrefab;
 
     #endregion
 
@@ -68,6 +79,14 @@ public class LevelGameManager : MonoBehaviour
     {
         resetText.SetActive(false);
         winText.SetActive(false);
+
+        Instantiate(playerPrefab, levelData.player, Quaternion.identity);
+
+        GameObject box = new GameObject("Boxes");
+        foreach (var boxPosition in levelData.boxes)
+        {
+            Instantiate(boxPrefab, boxPosition, Quaternion.identity, box.transform);
+        }
     }
 
     private void Update()
