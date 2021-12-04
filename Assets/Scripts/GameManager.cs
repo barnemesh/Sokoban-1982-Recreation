@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene(_currentLevel);
+        if (Input.GetKeyDown(KeyCode.Space)) SceneManager.LoadScene(_currentLevel);
 
         if (Input.GetKeyDown(KeyCode.Q)) Application.Quit();
     }
