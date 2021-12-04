@@ -14,6 +14,9 @@ public class LevelGameManager : MonoBehaviour
     [SerializeField]
     private int levelNumber;
 
+    [SerializeField]
+    private int maxResetCount = 4;
+
     #endregion
 
     #region Private Fields
@@ -23,6 +26,7 @@ public class LevelGameManager : MonoBehaviour
     private Movement _player;
     private bool _waitingForInput;
     private int _targetScene;
+    private int _resets = 0;
 
     #endregion
 
