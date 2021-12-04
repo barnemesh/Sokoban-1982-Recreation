@@ -11,6 +11,9 @@ public class LevelGameManager : MonoBehaviour
     [SerializeField]
     private GameObject resetText;
 
+    [SerializeField]
+    private int levelNumber;
+
     #endregion
 
     #region Private Fields
@@ -54,7 +57,7 @@ public class LevelGameManager : MonoBehaviour
     private void Awake()
     {
         _shared = this;
-        _targetScene = 1;
+        _targetScene = levelNumber;
     }
 
     private void Start()
@@ -74,11 +77,11 @@ public class LevelGameManager : MonoBehaviour
             {
                 case 0:
                     winText.SetActive(true);
-                    _targetScene = 0;
+                    _targetScene = (levelNumber + 1) % SceneManager.sceneCountInBuildSettings;
                     break;
                 default:
                     resetText.SetActive(true);
-                    _targetScene = 1;
+                    _targetScene = levelNumber;
                     break;
             }
         }

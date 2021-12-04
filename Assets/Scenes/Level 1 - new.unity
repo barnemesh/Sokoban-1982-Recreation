@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.25
+  m_fontSize: 42.65
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1915,6 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winText: {fileID: 1562672187}
   resetText: {fileID: 331695617}
+  levelNumber: 1
 --- !u!4 &1391200226
 Transform:
   m_ObjectHideFlags: 0
@@ -2073,7 +2074,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.25
+  m_fontSize: 42.65
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1
