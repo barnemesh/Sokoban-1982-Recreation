@@ -1,7 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class LevelGameManager : MonoBehaviour
 {
