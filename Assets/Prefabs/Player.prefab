@@ -99,11 +99,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updatesCountInMovement: 4
-  sprites:
-  - {fileID: -7061961827533527962, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
-  - {fileID: -4541695534731880313, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
-  - {fileID: -2431253098852522738, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
-  - {fileID: 5026186521847466805, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
+  _sprites:
+    up: {fileID: -7061961827533527962, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
+    down: {fileID: -4541695534731880313, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
+    left: {fileID: -2431253098852522738, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
+    right: {fileID: 5026186521847466805, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
   mySpriteRenderer: {fileID: 68871756193846777}
   myRigidbody: {fileID: 68871756193846779}
 --- !u!50 &68871756193846779

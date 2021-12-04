@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /**
@@ -20,9 +21,21 @@ public class Movement : MonoBehaviour
     [Tooltip("How many updates should a single movement take")]
     private float updatesCountInMovement = 4.0f;
 
+    // [SerializeField]
+    // [Tooltip("Up, Down, Left, Right")]
+    // private Sprite[] sprites;
+    
+    [System.Serializable]
+    public struct Sprites
+    {
+        public Sprite up;
+        public Sprite down;
+        public Sprite left;
+        public Sprite right;
+    }
+
     [SerializeField]
-    [Tooltip("Up, Down, Left, Right")]
-    private Sprite[] sprites;
+    private Sprites _sprites;
 
     [SerializeField]
     private SpriteRenderer mySpriteRenderer;
@@ -59,25 +72,25 @@ public class Movement : MonoBehaviour
         _targetDirection = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            mySpriteRenderer.sprite = sprites[2];
+            mySpriteRenderer.sprite = _sprites.left;
             _targetDirection = Vector2.left;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            mySpriteRenderer.sprite = sprites[0];
+            mySpriteRenderer.sprite = _sprites.up;
             _targetDirection = Vector2.up;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            mySpriteRenderer.sprite = sprites[3];
+            mySpriteRenderer.sprite = _sprites.right;
             _targetDirection = Vector2.right;
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            mySpriteRenderer.sprite = sprites[1];
+            mySpriteRenderer.sprite = _sprites.down;
             _targetDirection = Vector2.down;
         }
 
