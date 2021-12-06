@@ -118,7 +118,7 @@ public class Movement : MonoBehaviour
     {
         if ( Pause || !_moving )
             return;
-
+            
         // If we need to move, use exactly updatesCountInMovement to finish the entire movement.
         _distancePercentage += 1 / updatesCountInMovement;
         _distancePercentage = _distancePercentage >= 1 ? 1 : _distancePercentage;
