@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class GameManager
 {
-    public static int MaxResets { get; } = 4;
-    public static int TargetCounter { get; set; }
-
-    public static PlayerControl Player { get; set; }
-
     private static int _resets;
     private static int _currentLevel;
 
@@ -18,13 +11,15 @@ public static class GameManager
     private static GameObject _resetText;
 
     private static GameObject _activeText;
+    public static int MaxResets { get; } = 4;
+    public static int TargetCounter { get; set; }
+
+    public static PlayerControl Player { get; set; }
 
     public static void TogglePlayerMovement ()
     {
         if ( Player != null )
-        {
             Player.Pause = !Player.Pause;
-        }
     }
 
     public static void SetLevel (int levelNumber)

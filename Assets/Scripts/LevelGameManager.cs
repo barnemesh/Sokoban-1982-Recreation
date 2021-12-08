@@ -1,7 +1,5 @@
-using Unity.Mathematics;
+using Scriptable_Objects.Level_Datas;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class LevelGameManager : MonoBehaviour
 {
@@ -38,6 +36,7 @@ public class LevelGameManager : MonoBehaviour
 
     #endregion
 
+
     #region Monobehaviour
 
     private void Start ()
@@ -47,14 +46,12 @@ public class LevelGameManager : MonoBehaviour
         lostText.SetActive(false);
         GameManager.SetTexts(winText, lostText, resetText);
         GameManager.SetLevel(levelNumber);
-        
+
         Instantiate(playerPrefab, levelData.player, Quaternion.identity);
 
-        GameObject box = new GameObject("Boxes");
+        var box = new GameObject("Boxes");
         foreach ( var boxPosition in levelData.boxes )
-        {
             Instantiate(boxPrefab, boxPosition, Quaternion.identity, box.transform);
-        }
     }
 
     private void Update ()
@@ -70,14 +67,10 @@ public class LevelGameManager : MonoBehaviour
         // if already waiting for input, check if there is input.
         if ( !_waitingForInput ) return;
         if ( Input.GetKeyDown(KeyCode.Q) )
-        {
             Application.Quit();
-        }
 
         if ( Input.GetKeyDown(KeyCode.Y) )
-        {
             GameManager.SwitchToTargetScene();
-        }
 
         if ( Input.GetKeyDown(KeyCode.N) )
         {

@@ -22,6 +22,9 @@ public class PlayerControl : MonoBehaviour
     [Tooltip("How many updates should a single movement take")]
     private float updatesCountInMovement = 4.0f;
 
+    /// <summary>
+    ///     Struct to keep the sprites - just to be able to create a list with named elements
+    /// </summary>
     [Serializable]
     public struct Sprites
     {

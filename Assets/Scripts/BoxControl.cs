@@ -11,7 +11,7 @@ public class BoxControl : MonoBehaviour
     #region Public Methods
 
     /// <summary>
-    /// Check if the box can be moved in specified direction, and if it can, move it.
+    ///     Check if the box can be moved in specified direction, and if it can, move it.
     /// </summary>
     /// <param name="direction">direction to move</param>
     /// <returns>true if moved, false o.w</returns>
