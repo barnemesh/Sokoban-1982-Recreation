@@ -41,12 +41,14 @@ public class LevelGameManager : MonoBehaviour
 
     private void Start ()
     {
+        // Update GameManager with current level data
         resetText.SetActive(false);
         winText.SetActive(false);
         lostText.SetActive(false);
         GameManager.SetTexts(winText, lostText, resetText);
         GameManager.SetLevel(levelNumber);
 
+        // Create player and Boxes
         Instantiate(playerPrefab, levelData.player, Quaternion.identity);
 
         var box = new GameObject("Boxes");

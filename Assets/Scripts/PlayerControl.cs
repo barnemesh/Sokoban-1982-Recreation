@@ -61,7 +61,7 @@ public class PlayerControl : MonoBehaviour
     private void Start ()
     {
         _lastPosition = myRigidbody.position;
-        GameManager.Player = this;
+        GameManager.Player = this;  // register this player as active
     }
 
     // Update is called once per frame
@@ -112,6 +112,7 @@ public class PlayerControl : MonoBehaviour
 
         if ( hit.collider == null ) _moving = true;
 
+        // Count movements
         if ( _moving ) GameManager.MoveCounter++;
     }
 

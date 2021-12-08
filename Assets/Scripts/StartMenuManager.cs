@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /**
- * Main menu runner. for now as simple as it can go. in the future should be able to control multiple levels.
+ * Main menu runner.
  */
 public class StartMenuManager : MonoBehaviour
 {

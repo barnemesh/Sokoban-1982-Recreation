@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public static class GameManager
 {
+    #region Private Variables
+
     private static int _resets;
     private static int _currentLevel;
     private static int _targetCounter;
@@ -14,6 +16,12 @@ public static class GameManager
 
     private static GameObject _activeText;
     private static PlayerControl _playerControl;
+
+    #endregion
+
+
+    #region Properties
+
     public static int MaxResets { get; } = 4;
 
     public static int TargetCounter
@@ -43,6 +51,19 @@ public static class GameManager
 
     public static int MoveCounter { get; set; }
 
+    #endregion
+
+
+    #region Setter Methods
+
+    public static void SetTexts (GameObject winText, GameObject lostText, GameObject resetText)
+    {
+        DeactivateText();
+        _winText = winText;
+        _lostText = lostText;
+        _resetText = resetText;
+    }
+    
     public static void TogglePlayerMovement ()
     {
         if ( Player != null )
@@ -56,14 +77,10 @@ public static class GameManager
         _currentLevel = levelNumber;
     }
 
-    private static int GetTargetScene ()
-    {
-        return TargetCounter switch
-        {
-            0 => (_currentLevel + 1) % SceneManager.sceneCountInBuildSettings,
-            _ => _resets >= MaxResets ? 0 : _currentLevel
-        };
-    }
+    #endregion
+
+
+    #region Manager Methods
 
     public static void SwitchToTargetScene ()
     {
@@ -92,11 +109,19 @@ public static class GameManager
         _activeText = null;
     }
 
-    public static void SetTexts (GameObject winText, GameObject lostText, GameObject resetText)
+    #endregion
+
+
+    #region Private Helper Methods
+
+    private static int GetTargetScene ()
     {
-        DeactivateText();
-        _winText = winText;
-        _lostText = lostText;
-        _resetText = resetText;
+        return TargetCounter switch
+        {
+            0 => (_currentLevel + 1) % SceneManager.sceneCountInBuildSettings,
+            _ => _resets >= MaxResets ? 0 : _currentLevel
+        };
     }
+
+    #endregion
 }
