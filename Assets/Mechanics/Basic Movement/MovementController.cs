@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /**
- * Movement mechanic.
+ * PlayerControl mechanic.
  * Move the avatar using the arrow keys.
  * Change the sprite to the correct sprite based on last movement direction.
  * Do not teleport - gradual movement.

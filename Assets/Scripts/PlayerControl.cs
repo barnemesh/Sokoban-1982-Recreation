@@ -4,7 +4,7 @@ using UnityEngine;
 /**
  * Player avatar controller.
  */
-public class Movement : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
     #region Properties
 
@@ -22,11 +22,7 @@ public class Movement : MonoBehaviour
     [Tooltip("How many updates should a single movement take")]
     private float updatesCountInMovement = 4.0f;
 
-    // [SerializeField]
-    // [Tooltip("Up, Down, Left, Right")]
-    // private Sprite[] sprites;
-
-    [System.Serializable]
+    [Serializable]
     public struct Sprites
     {
         public Sprite up;
@@ -36,7 +32,7 @@ public class Movement : MonoBehaviour
     }
 
     [SerializeField]
-    private Sprites _sprites;
+    private Sprites sprites;
 
     [SerializeField]
     private SpriteRenderer mySpriteRenderer;
@@ -62,7 +58,7 @@ public class Movement : MonoBehaviour
     private void Start ()
     {
         _lastPosition = myRigidbody.position;
-        LevelGameManager.Player = this;
+        GameManager.Player = this;
     }
 
     // Update is called once per frame
@@ -74,25 +70,25 @@ public class Movement : MonoBehaviour
         _targetDirection = Vector2.zero;
         if ( Input.GetKeyDown(KeyCode.LeftArrow) )
         {
-            mySpriteRenderer.sprite = _sprites.left;
+            mySpriteRenderer.sprite = sprites.left;
             _targetDirection = Vector2.left;
         }
 
         if ( Input.GetKeyDown(KeyCode.UpArrow) )
         {
-            mySpriteRenderer.sprite = _sprites.up;
+            mySpriteRenderer.sprite = sprites.up;
             _targetDirection = Vector2.up;
         }
 
         if ( Input.GetKeyDown(KeyCode.RightArrow) )
         {
-            mySpriteRenderer.sprite = _sprites.right;
+            mySpriteRenderer.sprite = sprites.right;
             _targetDirection = Vector2.right;
         }
 
         if ( Input.GetKeyDown(KeyCode.DownArrow) )
         {
-            mySpriteRenderer.sprite = _sprites.down;
+            mySpriteRenderer.sprite = sprites.down;
             _targetDirection = Vector2.down;
         }
 
@@ -118,7 +114,7 @@ public class Movement : MonoBehaviour
     {
         if ( Pause || !_moving )
             return;
-            
+
         // If we need to move, use exactly updatesCountInMovement to finish the entire movement.
         _distancePercentage += 1 / updatesCountInMovement;
         _distancePercentage = _distancePercentage >= 1 ? 1 : _distancePercentage;

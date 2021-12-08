@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_RefResolutionX: 496
   m_RefResolutionY: 280
   m_UpscaleRT: 0
-  m_PixelSnapping: 0
+  m_PixelSnapping: 1
   m_CropFrameX: 1
   m_CropFrameY: 1
   m_StretchFill: 1
@@ -2048,6 +2048,10 @@ PrefabInstance:
       objectReference: {fileID: 1562672187}
     - target: {fileID: 643425666656208196, guid: 9f81747c73a3f3c48adcb4d9e95612d2, type: 3}
       propertyPath: loseText
+      value: 
+      objectReference: {fileID: 1770589356}
+    - target: {fileID: 643425666656208196, guid: 9f81747c73a3f3c48adcb4d9e95612d2, type: 3}
+      propertyPath: lostText
       value: 
       objectReference: {fileID: 1770589356}
     - target: {fileID: 643425666656208196, guid: 9f81747c73a3f3c48adcb4d9e95612d2, type: 3}
