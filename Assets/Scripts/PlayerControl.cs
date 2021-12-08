@@ -111,6 +111,8 @@ public class PlayerControl : MonoBehaviour
         }
 
         if ( hit.collider == null ) _moving = true;
+
+        if ( _moving ) GameManager.MoveCounter++;
     }
 
     private void FixedUpdate ()
