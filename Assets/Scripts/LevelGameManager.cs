@@ -1,9 +1,13 @@
 using Scriptable_Objects.Level_Datas;
+using TMPro;
 using UnityEngine;
 
 public class LevelGameManager : MonoBehaviour
 {
     #region Inspector
+
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
 
     [SerializeField]
     private GameObject winText;
@@ -46,6 +50,7 @@ public class LevelGameManager : MonoBehaviour
         winText.SetActive(false);
         lostText.SetActive(false);
         GameManager.SetTexts(winText, lostText, resetText);
+        GameManager.ScoreText = scoreText; // todo refactor to texts
         GameManager.SetLevel(levelNumber);
 
         // Create player and Boxes

@@ -1,14 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public static class GameManager
 {
     #region Private Variables
 
+    private const string ScoreFormat = "Moves: {0}  \t \t Resets: {1}";
+    private static bool _levelWon;
+
     private static int _resets;
     private static int _currentLevel;
     private static int _targetCounter;
-    private static int _movesWhenWon;
+    private static int _movesInLevel;
 
     private static GameObject _winText;
     private static GameObject _lostText;
@@ -16,13 +21,26 @@ public static class GameManager
 
     private static GameObject _activeText;
     private static PlayerControl _playerControl;
-
+    
     #endregion
 
 
     #region Properties
+    
+    public static TextMeshProUGUI ScoreText { get; set; }
 
     public static int MaxResets { get; } = 4;
+
+    public static int MoveCounter
+    {
+        get => _movesInLevel;
+        set
+        {
+            if (_levelWon) return;
+            _movesInLevel = value;
+            UpdateScore();
+        } 
+    }
 
     public static int TargetCounter
     {
@@ -30,11 +48,7 @@ public static class GameManager
         set
         {
             _targetCounter = value;
-            if ( _targetCounter == 0 && _movesWhenWon == 0 )
-            {
-                _movesWhenWon = MoveCounter;
-                Debug.Log($"Moves when won: {_movesWhenWon}. Dont forget F1.");
-            }
+            _levelWon = _targetCounter == 0;
         }
     }
 
@@ -44,13 +58,11 @@ public static class GameManager
         set
         {
             _playerControl = value;
+            _levelWon = false;
             MoveCounter = 0;
-            _movesWhenWon = 0;
         }
     }
-
-    public static int MoveCounter { get; set; }
-
+    
     #endregion
 
 
@@ -62,6 +74,7 @@ public static class GameManager
         _winText = winText;
         _lostText = lostText;
         _resetText = resetText;
+        // todo: set score texts
     }
     
     public static void TogglePlayerMovement ()
@@ -74,7 +87,9 @@ public static class GameManager
     {
         _resets = levelNumber == _currentLevel ? _resets + 1 : 0;
         TargetCounter = 0;
+        _levelWon = false;
         _currentLevel = levelNumber;
+        UpdateScore(); // todo: refactor player resets and this?
     }
 
     #endregion
@@ -123,5 +138,10 @@ public static class GameManager
         };
     }
 
+    private static void UpdateScore ()
+    {
+        if ( ScoreText == null ) return;
+        ScoreText.text = string.Format(ScoreFormat, _movesInLevel, MaxResets - _resets);
+    }
     #endregion
 }
