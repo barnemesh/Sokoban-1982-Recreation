@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+/// <summary>
+/// Static Game Manager - data and changes UI and scenes as required
+/// </summary>
 public static class GameManager
 {
     #region Private Variables
@@ -27,10 +30,21 @@ public static class GameManager
 
     #region Properties
     
+    /// <summary>
+    /// If Exists - Text to show move count and reset count.
+    /// Does not exist in the original game - but is here to show possibilities.
+    /// </summary>
     public static TextMeshProUGUI ScoreText { get; set; }
 
+    /// <summary>
+    /// Maximum number of resets per level. Public to allow future improvements for levels with more or less resets,
+    /// or UI control.
+    /// </summary>
     public static int MaxResets { get; } = 4;
 
+    /// <summary>
+    /// Number of moves since level start. Did not exist in the original game. If there is a score text, updates it.
+    /// </summary>
     public static int MoveCounter
     {
         get => _movesInLevel;
@@ -42,6 +56,9 @@ public static class GameManager
         } 
     }
 
+    /// <summary>
+    /// Counter for the number of targets that have no boxes on them in the current level.
+    /// </summary>
     public static int TargetCounter
     {
         get => _targetCounter;
@@ -52,6 +69,9 @@ public static class GameManager
         }
     }
 
+    /// <summary>
+    /// The Player in the current level.
+    /// </summary>
     public static PlayerControl Player
     {
         get => _playerControl;
@@ -68,6 +88,12 @@ public static class GameManager
 
     #region Setter Methods
 
+    /// <summary>
+    /// Set the UI texts used in the current level.
+    /// </summary>
+    /// <param name="winText"> Text to display after level was won.</param>
+    /// <param name="lostText"> Text to display when reached max resets for the level.</param>
+    /// <param name="resetText"> Text to display when the level isn't won yet, and max resets wasn't reached.</param>
     public static void SetTexts (GameObject winText, GameObject lostText, GameObject resetText)
     {
         DeactivateText();
@@ -77,12 +103,19 @@ public static class GameManager
         // todo: set score texts
     }
     
+    /// <summary>
+    /// Toggle the current Player ability to move, while UI is displayed.
+    /// </summary>
     public static void TogglePlayerMovement ()
     {
         if ( Player != null )
             Player.Pause = !Player.Pause;
     }
 
+    /// <summary>
+    /// Update the current level the game manager manages, and number of resets in this level.
+    /// </summary>
+    /// <param name="levelNumber"> Number of new level.</param>
     public static void SetLevel (int levelNumber)
     {
         _resets = levelNumber == _currentLevel ? _resets + 1 : 0;
@@ -97,12 +130,18 @@ public static class GameManager
 
     #region Manager Methods
 
+    /// <summary>
+    /// Load the next scene based on current level status.
+    /// </summary>
     public static void SwitchToTargetScene ()
     {
         DeactivateText();
         SceneManager.LoadScene(GetTargetScene());
     }
 
+    /// <summary>
+    /// Display UI text based on current level status.
+    /// </summary>
     public static void ActivateText ()
     {
         DeactivateText();
@@ -115,6 +154,9 @@ public static class GameManager
         _activeText.SetActive(true);
     }
 
+    /// <summary>
+    /// Remove the Text currently displayed.
+    /// </summary>
     public static void DeactivateText ()
     {
         if ( _activeText == null )
@@ -129,6 +171,10 @@ public static class GameManager
 
     #region Private Helper Methods
 
+    /// <summary>
+    /// Get the number of the next scene to load. If level was won, get next level, else reload current scene.
+    /// </summary>
+    /// <returns> NUmber of scene to load</returns>
     private static int GetTargetScene ()
     {
         return TargetCounter switch
@@ -138,6 +184,10 @@ public static class GameManager
         };
     }
 
+    /// <summary>
+    /// If score text exists, update it with current values.
+    /// In the original game this did not exist.
+    /// </summary>
     private static void UpdateScore ()
     {
         if ( ScoreText == null ) return;

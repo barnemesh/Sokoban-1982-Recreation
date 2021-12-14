@@ -1237,7 +1237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &358585813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1253,7 +1253,7 @@ RectTransform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.01, y: 0.01}
-  m_AnchorMax: {x: 0.3, y: 0.05}
+  m_AnchorMax: {x: 0.99, y: 0.075}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1279,8 +1279,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Test
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c54aeea6c53137049b3c679d4375c777, type: 2}
-  m_sharedMaterial: {fileID: -3777889342290687585, guid: c54aeea6c53137049b3c679d4375c777, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d5974c34d9d70246ab6b793d170acdc, type: 2}
+  m_sharedMaterial: {fileID: -1151716099065599443, guid: 0d5974c34d9d70246ab6b793d170acdc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1304,11 +1304,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.8
+  m_fontSize: 26.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 4
+  m_fontSizeMin: 12
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -1960,15 +1960,15 @@ RectTransform:
   m_GameObject: {fileID: 1770589356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99979204, y: 0.99979204, z: 0.99979204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1778167340}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15, y: 0.25}
   m_AnchorMax: {x: 0.9, y: 0.5}
-  m_AnchoredPosition: {x: 0.87854004, y: -2.4607086}
-  m_SizeDelta: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770589358
 MonoBehaviour:

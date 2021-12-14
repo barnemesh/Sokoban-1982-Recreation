@@ -6,27 +6,44 @@ public class LevelGameManager : MonoBehaviour
 {
     #region Inspector
 
+    /// <summary>
+    /// Text to show score. Did not exist in the original game.
+    /// </summary>
     [SerializeField]
     private TextMeshProUGUI scoreText;
-
+    /// <summary>
+    /// Text to display when the level is won.
+    /// </summary>
     [SerializeField]
     private GameObject winText;
-
+    /// <summary>
+    /// Text to display when the level is ongoing.
+    /// </summary>
     [SerializeField]
     private GameObject resetText;
-
+    /// <summary>
+    /// Text to display when last reset was reached.
+    /// </summary>
     [SerializeField]
     private GameObject lostText;
-
+    /// <summary>
+    /// This level number.
+    /// </summary>
     [SerializeField]
     private int levelNumber;
-
+    /// <summary>
+    /// Level Data for this level.
+    /// </summary>
     [SerializeField]
     private LevelData levelData;
-
+    /// <summary>
+    /// Box prefab for the player to push.
+    /// </summary>
     [SerializeField]
     private GameObject boxPrefab;
-
+    /// <summary>
+    /// Player prefab, the controlled avatar.
+    /// </summary>
     [SerializeField]
     private GameObject playerPrefab;
 
