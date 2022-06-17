@@ -81,7 +81,7 @@ public class LevelGameManager : MonoBehaviour
     private void Update ()
     {
         // Use f1 to do stuff.
-        if ( !_waitingForInput && Input.GetKeyDown(KeyCode.F1) )
+        if ( !_waitingForInput && (Input.GetKeyDown(KeyCode.F1) || Input.GetKeyDown(KeyCode.Space)) )
         {
             _waitingForInput = true;
             GameManager.TogglePlayerMovement();

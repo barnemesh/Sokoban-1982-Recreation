@@ -12,19 +12,19 @@ public class ResetController : MonoBehaviour
 
     private event Action ResetLevel;
 
-    private void Awake ()
+    private void Awake()
     {
         _shared = this;
     }
 
-    public static void RegisterReset (Action call)
+    public static void RegisterReset(Action call)
     {
         _shared.ResetLevel += call;
     }
 
-    private void Update ()
+    private void Update()
     {
-        if ( Input.GetKeyDown(KeyCode.F1) )
+        if (Input.GetKeyDown(KeyCode.F1) || Input.GetKeyDown(KeyCode.Space))
         {
             ResetLevel?.Invoke();
         }
