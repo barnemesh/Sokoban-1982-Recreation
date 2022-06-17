@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updatesCountInMovement: 4
-  _sprites:
+  sprites:
     up: {fileID: -7061961827533527962, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
     down: {fileID: -4541695534731880313, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}
     left: {fileID: -2431253098852522738, guid: 86af50bdaa5f9914693872c5995796b0, type: 3}

@@ -1,125 +1,106 @@
-using Unity.Mathematics;
+using Scriptable_Objects.Level_Datas;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelGameManager : MonoBehaviour
 {
     #region Inspector
 
+    /// <summary>
+    /// Text to show score. Did not exist in the original game.
+    /// </summary>
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+    /// <summary>
+    /// Text to display when the level is won.
+    /// </summary>
     [SerializeField]
     private GameObject winText;
-
+    /// <summary>
+    /// Text to display when the level is ongoing.
+    /// </summary>
     [SerializeField]
     private GameObject resetText;
-
+    /// <summary>
+    /// Text to display when last reset was reached.
+    /// </summary>
+    [SerializeField]
+    private GameObject lostText;
+    /// <summary>
+    /// This level number.
+    /// </summary>
     [SerializeField]
     private int levelNumber;
-
-    [SerializeField]
-    private int maxResetCount = 4;
-
+    /// <summary>
+    /// Level Data for this level.
+    /// </summary>
     [SerializeField]
     private LevelData levelData;
-
+    /// <summary>
+    /// Box prefab for the player to push.
+    /// </summary>
     [SerializeField]
     private GameObject boxPrefab;
-
+    /// <summary>
+    /// Player prefab, the controlled avatar.
+    /// </summary>
     [SerializeField]
     private GameObject playerPrefab;
 
     #endregion
 
+
     #region Private Fields
 
-    private static LevelGameManager _shared;
-    private int _targetCounter;
-    private Movement _player;
+    private static int _resets;
     private bool _waitingForInput;
-    private int _targetScene;
-    private int _resets = 0;
 
     #endregion
 
-    #region Properties
-
-    /**
-     * <summary>The player Movement script in this level</summary>
-     */
-    public static Movement Player
-    {
-        get => _shared._player;
-        set => _shared._player = value;
-    }
-
-    /**
-     * <summary>The number of incomplete targets in the level</summary>
-     */
-    public static int TargetCounter
-    {
-        get => _shared._targetCounter;
-        set
-        {
-            _shared._targetCounter = value;
-            if (_shared._targetCounter == 0) Debug.Log("Won. use f1 to do stuff.");
-        }
-    }
-
-    #endregion
 
     #region Monobehaviour
 
-    private void Awake()
+    private void Start ()
     {
-        _shared = this;
-        _targetScene = levelNumber;
-    }
-
-    private void Start()
-    {
+        // Update GameManager with current level data
         resetText.SetActive(false);
         winText.SetActive(false);
+        lostText.SetActive(false);
+        GameManager.SetTexts(winText, lostText, resetText);
+        GameManager.ScoreText = scoreText; // todo refactor to texts
+        GameManager.SetLevel(levelNumber);
 
+        // Create player and Boxes
         Instantiate(playerPrefab, levelData.player, Quaternion.identity);
 
-        GameObject box = new GameObject("Boxes");
-        foreach (var boxPosition in levelData.boxes)
-        {
+        var box = new GameObject("Boxes");
+        foreach ( var boxPosition in levelData.boxes )
             Instantiate(boxPrefab, boxPosition, Quaternion.identity, box.transform);
-        }
     }
 
-    private void Update()
+    private void Update ()
     {
         // Use f1 to do stuff.
-        if (!_waitingForInput && Input.GetKeyDown(KeyCode.F1))
+        if ( !_waitingForInput && Input.GetKeyDown(KeyCode.F1) )
         {
             _waitingForInput = true;
-            _player.Pause = true;
-            switch (_targetCounter)
-            {
-                case 0:
-                    winText.SetActive(true);
-                    _targetScene = (levelNumber + 1) % SceneManager.sceneCountInBuildSettings;
-                    break;
-                default:
-                    resetText.SetActive(true);
-                    _targetScene = levelNumber;
-                    break;
-            }
+            GameManager.TogglePlayerMovement();
+            GameManager.ActivateText();
         }
 
         // if already waiting for input, check if there is input.
-        if (!_waitingForInput) return;
-        if (Input.GetKeyDown(KeyCode.Q)) Application.Quit();
+        if ( !_waitingForInput ) return;
+        if ( Input.GetKeyDown(KeyCode.Q) )
+            Application.Quit();
 
-        if (Input.GetKeyDown(KeyCode.Y)) SceneManager.LoadScene(_targetScene);
+        if ( Input.GetKeyDown(KeyCode.Y) )
+            GameManager.SwitchToTargetScene();
 
-        if (Input.GetKeyDown(KeyCode.N))
+        if ( Input.GetKeyDown(KeyCode.N) )
         {
             _waitingForInput = false;
-            _player.Pause = false;
-            winText.SetActive(false);
-            resetText.SetActive(false);
+            GameManager.TogglePlayerMovement();
+            GameManager.DeactivateText();
         }
     }
 
