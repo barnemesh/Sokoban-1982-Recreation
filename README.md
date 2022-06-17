@@ -1,2 +1,2 @@
-# Assignment 4: 80’s Revive
-Instructions can be found in the _brief_ handed out in the lesson.
+# Sokoban Recreation
+This re-creation of the classic 1982 original japanese version of the sokoban game, attempts to create an accurate replica of the first few levels implemented using Unity engine, and to create an easy to use project files that allows easy creation and re-creation of levels.

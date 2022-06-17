@@ -497,10 +497,10 @@ MonoBehaviour:
     have a part-time job at a big warehouse company! Your job is to clear up 20 warehouses.
     Please try your best. However, since the boxes are large, you can only push one
     by one. If you do poorly, the box will get stuck! Please be careful.</color>\n\n<align=\"center\"><color=purple>\u2191
-    Key (up) \n|\n\u2190 Key \u2014 \u2193 Key \u2014 \u2192Key\n     (Left)      
-    (down)    (Right)</color>\n<align=\"flush\">\n|Please clean up by moving them
-    to the red dots.|\n|When you fail or finish the job press the<color=red> F\u20221
-    key</color>.|\n<align=\"center\"><color=yellow>Press Space to start !\n"
+    Key (up) \n|\n\u2190 Key \u2014 \u2193 Key \u2014 \u2192Key\n    (Left)   (down)   
+    (Right)  </color>\n<align=\"flush\">\n|Please clean up by moving them to the
+    red dots.|\n|When you fail or finish the job press the<color=red> F\u20221 key</color>.|\n<align=\"center\"><color=yellow>Press
+    Space to start !\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c54aeea6c53137049b3c679d4375c777, type: 2}
   m_sharedMaterial: {fileID: -3777889342290687585, guid: c54aeea6c53137049b3c679d4375c777, type: 2}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.1
+  m_fontSize: 22.15
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
